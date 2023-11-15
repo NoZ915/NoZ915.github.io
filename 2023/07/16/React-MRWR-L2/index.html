@@ -1,0 +1,435 @@
+<!DOCTYPE html><html lang="zh-TW" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>React(MRWR)第 2 節： Creating Content with JSX | NoZ</title><meta name="author" content="NoZ"><meta name="copyright" content="NoZ"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Udemy課程：Modern React with Redux [2023 Update]  20230716Sun. 2-10. Showing Basic Content注意！當我們的project在瀏覽器開始執行後，index.js這個檔案會是第一個被執行的！（i.e.index.js即程式的進入點） 所以我們將在index.js這個檔案中產生一些component並顯示到網頁上。大致上會">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React(MRWR)第 2 節： Creating Content with JSX">
+<meta property="og:url" content="http://example.com/2023/07/16/React-MRWR-L2/index.html">
+<meta property="og:site_name" content="NoZ">
+<meta property="og:description" content="Udemy課程：Modern React with Redux [2023 Update]  20230716Sun. 2-10. Showing Basic Content注意！當我們的project在瀏覽器開始執行後，index.js這個檔案會是第一個被執行的！（i.e.index.js即程式的進入點） 所以我們將在index.js這個檔案中產生一些component並顯示到網頁上。大致上會">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://i.imgur.com/S10x50r.png">
+<meta property="article:published_time" content="2023-07-15T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-11-15T11:00:53.303Z">
+<meta property="article:author" content="NoZ">
+<meta property="article:tag" content="React">
+<meta property="article:tag" content="Udemy">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.imgur.com/S10x50r.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2023/07/16/React-MRWR-L2/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '複製成功',
+    error: '複製錯誤',
+    noSupport: '瀏覽器不支援'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '剛剛',
+    min: '分鐘前',
+    hour: '小時前',
+    day: '天前',
+    month: '個月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: NoZ","link":"連結: ","source":"來源: NoZ","info":"著作權歸作者所有。商業轉載請聯繫作者獲得授權，非商業轉載請註明出處。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '載入更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'React(MRWR)第 2 節： Creating Content with JSX',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-11-15 19:00:53'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.0.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.imgur.com/S10x50r.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">2</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">1</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="NoZ"><img class="site-icon" src="https://i.imgur.com/S10x50r.png"/><span class="site-name">NoZ</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">React(MRWR)第 2 節： Creating Content with JSX</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">發表於</span><time class="post-meta-date-created" datetime="2023-07-15T16:00:00.000Z" title="發表於 2023-07-16 00:00:00">2023-07-16</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新於</span><time class="post-meta-date-updated" datetime="2023-11-15T11:00:53.303Z" title="更新於 2023-11-15 19:00:53">2023-11-15</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/React/">React</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="React(MRWR)第 2 節： Creating Content with JSX"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">閱讀量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="post-content" id="article-container"><blockquote>
+<p>Udemy課程：<a target="_blank" rel="noopener" href="https://www.udemy.com/course/react-redux/">Modern React with Redux [2023 Update]</a></p>
+</blockquote>
+<p><code>20230716Sun.</code></p>
+<h2 id="2-10-Showing-Basic-Content"><a href="#2-10-Showing-Basic-Content" class="headerlink" title="2-10. Showing Basic Content"></a>2-10. Showing Basic Content</h2><p>注意！當我們的project在瀏覽器開始執行後，<code>index.js</code>這個檔案會是第一個被執行的！（i.e.<code>index.js</code>即程式的進入點）</p>
+<p>所以我們將在<code>index.js</code>這個檔案中產生一些component並顯示到網頁上。大致上會有5個步驟：</p>
+<div style="border: black 1px solid; padding: 5px 5px; margin: 15px 0px">
+    <h3 style="margin: 0">step1. Import React and ReactDOM libraries</h3>
+</div>
+
+<blockquote>
+<p>參考資料：</p>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://medium.com/%E9%BA%A5%E5%85%8B%E7%9A%84%E5%8D%8A%E8%B7%AF%E5%87%BA%E5%AE%B6%E7%AD%86%E8%A8%98/%E7%AD%86%E8%A8%98-why-react-424f2abaf9a2">[筆記] Why React?</a></li>
+<li><a target="_blank" rel="noopener" href="https://medium.com/%E6%89%8B%E5%AF%AB%E7%AD%86%E8%A8%98/build-a-simple-virtual-dom-5cf12ccf379f">Virtual DOM | 為了瞭解原理，那就來實作一個簡易 Virtual DOM 吧！</a></li>
+<li><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000037534946">從react和react-dom的關係開始</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/401340016">diff 算法深入一下？</a></li>
+</ol>
+</blockquote>
+<p>keywords: React、ReactDOM、Virtual DOM、diff algo<br>先引入React跟ReactDOM這兩個函式庫。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">import React from &#x27;react&#x27;;</span><br><span class="line">import ReactDOM from &#x27;react-dom/client&#x27;;</span><br></pre></td></tr></table></figure>
+<p>可能會感到疑惑，為什麼這裡需要引入兩種函式庫？其實兩者都有各自負責的事情。</p>
+<h4 id="React"><a href="#React" class="headerlink" title="React"></a>React</h4><p>Library that defines what a component is and how multiple component work together.</p>
+<p>React library負責描述特性，提供React API。類組件、函數組件、hooks、contexts、refs…這些都是React特性，而react 模塊只描述特性長什麼樣、該怎麼用，並不負責特性的具體實現。</p>
+<h4 id="ReactDOM"><a href="#ReactDOM" class="headerlink" title="ReactDOM"></a>ReactDOM</h4><p>Library that knows how to get a component to show up in the browser.<br>負責實現特性。</p>
+<p>react-dom、react-native 稱為渲染器，負責在不同的宿主載體上實現特性，達到與描述相對應的真實效果。比如在瀏覽器上，渲染出DOM樹、響應點擊事件等。（react-native則用於mobile之上）</p>
+<div style="border: black 1px solid; padding: 5px 5px; margin: 15px 0px">
+    <h3 style="margin: 0">step2. Get a reference to the div with ID root</h3>
+</div>
+
+<p>我們可以從專案中的public資料夾找到<code>index.html</code>檔案，但會發現這個檔案中，除了一個擁有root id的空<code>div</code>之外，什麼都沒有了，那他又是如何顯示出東西的呢？</p>
+<p><img src="https://hackmd.io/_uploads/B1olWuzc2.png"></p>
+<p>答案就在我們要做的第二步驟中！當我們想要顯示我們做的react appilcation時，便會去取代擁有root id的空<code>div</code>，或者直接渲染進擁有root id的空<code>div</code>裡面。</p>
+<p>所以我們必須先抓到這個<code>div</code>，如此一來便能告訴react要顯示內容在這<code>div</code>中。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const el = document.getElementById(&#x27;root&#x27;);</span><br></pre></td></tr></table></figure>
+
+<div style="border: black 1px solid; padding: 5px 5px; margin: 15px 0px">
+    <h3 style="margin: 0">step3. Tell react to take control of the element</h3>
+</div>
+
+<p>第二步驟中，我們將抓到root id的空<code>div</code>命名為<code>el</code>。接著要利用ReactDOM Library中的createRoot特性，讓我們能顯示東西在<code>el</code>中。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const root = ReactDOM.createRoot(el);</span><br></pre></td></tr></table></figure>
+
+<div style="border: black 1px solid; padding: 5px 5px; margin: 15px 0px">
+    <h3 style="margin: 0">step4. Create a component</h3>
+</div>
+
+<p>要記得component是一個function回傳JSX，以下範例便是創造一個名為<code>App</code>的component，而這個component會回傳的內容為：<h1>Hi there!</h1></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function App() &#123;</span><br><span class="line">  return &lt;h1&gt;Hi there!&lt;/h1&gt;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<div style="border: black 1px solid; padding: 5px 5px; margin: 15px 0px">
+    <h3 style="margin: 0">step5. Show the component on the screen</h3>
+</div>
+
+<p>最後一步驟，把component渲染到螢幕上。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root.render(&lt;App /&gt;);</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="2-11-What-is-JSX"><a href="#2-11-What-is-JSX" class="headerlink" title="2-11. What is JSX?"></a>2-11. What is JSX?</h2><blockquote>
+<p>參考資料：</p>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://datacadamia.com/web/javascript/react/jsx_browser">How to render Jsx code in the browser</a></li>
+<li><a target="_blank" rel="noopener" href="https://medium.com/itsoktomakemistakes/%E8%AE%93%E7%80%8F%E8%A6%BD%E5%99%A8%E7%9C%8B%E6%87%82-jsx-%E7%9A%84%E6%96%B0%E9%81%B8%E6%93%87-htm-fd943f74304f">讓瀏覽器看懂 JSX 的新選擇 HTM</a></li>
+</ol>
+</blockquote>
+<p>JSX是一種語法，他可以讓我們的JavaScript像是在寫HTML一樣，但是前面提過，Browser無法讀懂JSX，所以我們需要先將JSX轉譯成JS code。</p>
+<p>複習一下<a target="_blank" rel="noopener" href="https://hackmd.io/mzB3hacSThe3_YR-sybWOQ">第一節</a>的內容：<br><img src="https://hackmd.io/_uploads/HyUIsuM92.png"></p>
+<p>而轉譯的過程便可以透過Bable來達成。（一般來說都是使用Bable）</p>
+<div>
+    <img src="https://hackmd.io/_uploads/Sk20ouMc2.png">
+    <p style="font-size: 5px; display: flex; justify-content: center;">
+    截圖自React(MRWR)2-11課程
+</p>
+</div>
+
+<p>這裡我們可以透過<a target="_blank" rel="noopener" href="https://babeljs.io/repl#?browsers=defaults%2C%20not%20ie%2011%2C%20not%20ie_mob%2011&build=&builtIns=false&corejs=3.21&spec=false&loose=false&code_lz=Q&debug=false&forceAllTransforms=false&modules=false&shippedProposals=false&circleciRepo=&evaluate=false&fileSize=false&timeTravel=false&sourceType=module&lineWrap=true&presets=env%2Creact%2Cstage-2&prettier=false&targets=&version=7.22.9&externalPlugins=&assumptions=%7B%7D">Bable.io</a>，來看JSX與經過Bable轉譯後的差異。</p>
+<p><img src="https://hackmd.io/_uploads/HJANJFGq2.png"></p>
+<p>所以總結一下，寫下<code>&lt;h1&gt;Hi there!&lt;/h1&gt;</code>並不能直接顯示在browser上，他只能告訴React說這裡建立了一個element，然後我們必須使用return，React才能去使用這個component。<br><img src="https://hackmd.io/_uploads/BkYCytGc2.png"></p>
+<hr>
+<h2 id="2-12-Printing-JavaScript-Variables-in-JSX"><a href="#2-12-Printing-JavaScript-Variables-in-JSX" class="headerlink" title="2-12. Printing JavaScript Variables in JSX"></a>2-12. Printing JavaScript Variables in JSX</h2><blockquote>
+<p>參考資料：</p>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://react.dev/learn/writing-markup-with-jsx">Writing Markup with JSX</a></li>
+<li><a target="_blank" rel="noopener" href="https://react.dev/learn/javascript-in-jsx-with-curly-braces">JavaScript in JSX with Curly Brace</a></li>
+</ol>
+</blockquote>
+<p>接下來的章節會提到如何在JSX中使用JS的變數。</p>
+<p>這裡將建立一個名為App的component，接著我們會在JSX中寫入JS expression（運算式），如果想要使用JS的變數，我們必須在JSX中運用curly brace（花括號&#x2F;大括號）把該變數包起來，便可以呈現動態的內容了！</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// 4) Create a component</span><br><span class="line"></span><br><span class="line">function App() &#123;</span><br><span class="line">  let message = &quot;Bye there!&quot;;</span><br><span class="line">  if (Math.random() &gt; 0.5)&#123;</span><br><span class="line">    message = &quot;Hi there!&quot;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  return &lt;h1&gt;&#123;message&#125;&lt;/h1&gt;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://hackmd.io/_uploads/r1aiheNq2.png"></p>
+<p>但要注意的是，花括號傳入的變數不能是物件（object），否則瀏覽器會報錯。</p>
+<hr>
+<h2 id="2-13-Shorthand-JS-Expressions"><a href="#2-13-Shorthand-JS-Expressions" class="headerlink" title="2-13. Shorthand JS Expressions"></a>2-13. Shorthand JS Expressions</h2><p>這個章節告訴我們如何縮短JS的運算式，先以時間為例，我們現在要在螢幕上印出目前的時間，以最基本的寫法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function APP()&#123;</span><br><span class="line">    const date = new Date();</span><br><span class="line">    const time = date.toLocaleTimeString();</span><br><span class="line"></span><br><span class="line">    return &lt;h1&gt;&#123;time&#125;&lt;/h1&gt;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>但其實我們可以直接在大括號中填入要執行的JS運算式，不一定要先利用變數：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function APP()&#123;</span><br><span class="line">    return &lt;h1&gt;&#123;new Date().toLocaleTimeString()&#125;&lt;/h1&gt;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="2-16-Typical-Component-Layouts"><a href="#2-16-Typical-Component-Layouts" class="headerlink" title="2-16. Typical Component Layouts"></a>2-16. Typical Component Layouts</h2><p>接著這個章節將提到經典的component layout，也就是一般來說大多數人會如何寫一個component？</p>
+<p>以下為常見的component寫法：</p>
+<p><img src="https://hackmd.io/_uploads/rkegMbN5h.png"></p>
+<p>在建立component的function之中，上方主要寫一些變數或計算等等，之後要運用於JSX中的; 而下方區塊則是我們希望這個component（元件）該如何顯示在螢幕上的內容。</p>
+<p>在這裡可以先對於component的模式有個大致概念，之後看多了，自然也會越上手、越熟悉。</p>
+<hr>
+<h2 id="2-17-Customizing-Elements-with-Props"><a href="#2-17-Customizing-Elements-with-Props" class="headerlink" title="2-17. Customizing Elements with Props"></a>2-17. Customizing Elements with Props</h2><p>我們可以知道在html中如果要有一個讓使用者輸入數字的框框，可以這樣寫：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=&quot;number&quot;&gt;</span><br></pre></td></tr></table></figure>
+
+<p>那如果現在要寫進JSX中，要怎麼寫呢？在這裡我們會運用到一個叫做props的system。<br><img src="https://hackmd.io/_uploads/r1D34ZNc2.png"></p>
+<p>其實就跟寫html時的概念沒兩樣，我們可以從下圖知，這個範例中一共有三種property(BTW props即property的縮寫)，分別為type、min、max</p>
+<p><img src="https://hackmd.io/_uploads/HJOZSb45h.png"></p>
+<p>但這裡有個重點！就是可以跟<a target="_blank" rel="noopener" href="https://hackmd.io/fxY8uO0fTpa9XBizBKTYWg?view#2-12-Printing-JavaScript-Variables-in-JSX">2-12章節</a>的概念做結合。亦即props的值，我們可以利用大括號，傳入動態的變數給props，以下為修改後的範例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">function App()&#123;</span><br><span class="line">  const inputType = &quot;number&quot;;</span><br><span class="line">  const minValue = 5;</span><br><span class="line"></span><br><span class="line">  return (</span><br><span class="line">    &lt;input</span><br><span class="line">      type = &#123;inputType&#125;</span><br><span class="line">      min = &#123;minValue&#125;</span><br><span class="line">    /&gt;</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>總結一下，在JSX中的props，props的value若是傳入變數、數字、物件或是陣列，都必須放進大括號中，而像是字串（string）則放入（雙）引號中。</p>
+<p><img src="https://hackmd.io/_uploads/HJUeKWEq3.png"></p>
+<p>尤其可以注意到物件的部份，物件的第一個大括號是給JSX的，第二個大括號則代表物件。</p>
+<p>再來，前面<a target="_blank" rel="noopener" href="https://hackmd.io/fxY8uO0fTpa9XBizBKTYWg?view#2-12-Printing-JavaScript-Variables-in-JSX">2-12章節</a>有提到「花括號傳入的變數不能是物件（object），否則瀏覽器會報錯」，但其實與此章節是有區別的：<br><img src="https://hackmd.io/_uploads/By-9Y-E5h.png"></p>
+<p>在2-12中提到的會產生錯誤，是因為不能直接顯示出物件，但此章節我們是將物件傳入給props，把物件作為了props的值了，這樣就不會產生錯誤。</p>
+<hr>
+<h2 id="2-18-Converting-HTML-to-JSX"><a href="#2-18-Converting-HTML-to-JSX" class="headerlink" title="2-18. Converting HTML to JSX"></a>2-18. Converting HTML to JSX</h2><h2 id="2-19-Applying-Styling-in-JSX"><a href="#2-19-Applying-Styling-in-JSX" class="headerlink" title="2-19. Applying Styling in JSX"></a>2-19. Applying Styling in JSX</h2><p>再來這個章節將要談，如何將HTML轉換成JSX，這裡老師給出了5個步驟：</p>
+<p><img src="https://hackmd.io/_uploads/SyeKkxSq2.png"></p>
+<div style="background-color: #deeba2; color: #4b570e; margin: 10px 0; padding: 10px 20px; width: fit-content; display: inline-block;">
+Step 1.
+</div> <span style="margin: 0 10px">將prop 利用駝峰式命名</span>
+
+<p><img src="https://hackmd.io/_uploads/Hk7YfxH53.png"></p>
+<div style="background-color: #deeba2; color: #4b570e; margin: 10px 0; padding: 10px 20px; width: fit-content; display: inline-block;">
+Step 2.
+</div> <span style="margin: 0 10px">屬性若為數字則必須使用大括號（curly braces { }）</span>
+
+<p>在HTML中，屬性若為數字，我們會將數字當作字串傳入，所以用引號。但在JSX中屬性若為數字，則要以大括號傳入，雖然不這麼做程式仍然會運作，但是會從Browser中看到error。</p>
+<p><img src="https://hackmd.io/_uploads/SyPasgrcn.png"></p>
+<div style="background-color: #deeba2; color: #4b570e; margin: 10px 0; padding: 10px 20px; width: fit-content; display: inline-block;">
+Step 3.
+</div> <span style="margin: 0 10px">prop的值若為boolean值（true or false）</span>
+
+<p>prop的值若為boolean值會有特殊的寫法。</p>
+<ol>
+<li>若為true，則可以直接寫prop的名字即可（但依然保持駝峰式寫法），當然如果想把true放進大括號中也是沒問題的，這裡只是提供一個更精簡的寫法。</li>
+<li>若為false，則必須把false寫進大括號中</li>
+</ol>
+<p><img src="https://hackmd.io/_uploads/Skv5l-B5h.png"></p>
+<div style="background-color: #deeba2; color: #4b570e; margin: 10px 0; padding: 10px 20px; width: fit-content; display: inline-block;">
+Step 4.
+</div> <span style="margin: 0 10px">class改寫為className</span>
+
+<p>在HTML中，我們會設定一些class，而在JSX中，”class”必須改成”className”做使用。</p>
+<p>:::danger<br>這裡會改為className是有原因的。因為JSX會透過Bable（之類的）轉譯成JS code，而在JS中，class為關鍵字，是有特殊語法用途的，因此在JSX裡改用”className”便是為了避免語法衝突。<br>:::</p>
+<p><img src="https://hackmd.io/_uploads/rkFYb-H53.png"></p>
+<div style="background-color: #deeba2; color: #4b570e; margin: 10px 0; padding: 10px 20px; width: fit-content; display: inline-block;">
+Step 5.
+</div> <span style="margin: 0 10px">inline style在JSX中用物件來表示</span>
+
+<p>若我們想把CSS的樣式寫在HTML中，就是利用inline style的方式，而在JSX中，則要把inline style用物件來表達。</p>
+<p><img src="https://hackmd.io/_uploads/SJu0GWrqh.png"></p>
+<hr>
+<h2 id="2-21-Extracting-Components"><a href="#2-21-Extracting-Components" class="headerlink" title="2-21. Extracting Components"></a>2-21. Extracting Components</h2><p>前面我們都是把程式寫在同一個檔案中（index.js），但是當專案越來越大、越複雜時，若仍然寫在同一個檔案中，則會非常難理解整個程式。</p>
+<p>因此，在這個章節將提到，我們會把component拆出來單獨建立一個檔案：<br><img src="https://hackmd.io/_uploads/ryHNHwU5n.png"></p>
+<p>從上圖可知，index.js檔案將專心import以及建立root，最後將import的component給show到螢幕上。</p>
+<p>而component的內容將丟給別的檔案來完成，例如這裡建立了一個App.js的檔案，就是要拿來專門做component用的。</p>
+<p>而製作component的步驟大致如下：<br><img src="https://hackmd.io/_uploads/B1UPuwI92.png"></p>
+<div style="background-color: #deeba2; color: #4b570e; margin: 10px 0; padding: 10px 20px; width: fit-content; display: inline-block;">
+Step 1.
+</div> <span style="margin: 0 10px">建立一個檔案</span>
+
+<p>一般來說建立來做component的檔案，檔案名稱都會以大寫作開頭！（但不一定要這麼做，只是多數人都會這麼做，類似不成紋的規定）</p>
+<div style="background-color: #deeba2; color: #4b570e; margin: 10px 0; padding: 10px 20px; width: fit-content; display: inline-block;">
+Step 2.
+</div> <span style="margin: 0 10px">製作component</span>
+
+<p>component必須是一個會回傳JSX的function。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function App()&#123;</span><br><span class="line">    retern &lt;h1&gt;...&lt;/h1&gt;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<div style="background-color: #deeba2; color: #4b570e; margin: 10px 0; padding: 10px 20px; width: fit-content; display: inline-block;">
+Step 3.
+</div> <span style="margin: 0 10px">export the component</span>
+
+<p>製作好component之後，要在該檔案的底部export這個component。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">App</span>;</span><br></pre></td></tr></table></figure>
+
+<div style="background-color: #deeba2; color: #4b570e; margin: 10px 0; padding: 10px 20px; width: fit-content; display: inline-block;">
+Step 4.
+</div> <span style="margin: 0 10px">import the component</span>
+
+<p>第三步驟將component export了，接著第四步驟就要在其他檔案（即會用到App component的檔案，這裡以index.js為例）中import 這個component。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// index.js</span></span><br><span class="line"><span class="keyword">import</span> <span class="title class_">App</span> <span class="keyword">from</span> <span class="string">&quot;./App.js&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<div style="background-color: #deeba2; color: #4b570e; margin: 10px 0; padding: 10px 20px; width: fit-content; display: inline-block;">
+Step 5.
+</div> <span style="margin: 0 10px">使用component</span>
+
+<p>上個步驟我們在index.js中import了App這個component，接著我們便可以在index.js檔案中使用名為App的component。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="title class_">App</span> /&gt;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="2-22-Module-Systems-Overview"><a href="#2-22-Module-Systems-Overview" class="headerlink" title="2-22. Module Systems Overview"></a>2-22. Module Systems Overview</h2><p>這章節會提到export跟import。</p>
+<div style="border: black 1px solid; padding: 5px 5px; margin: 15px 0px; display: flex; align-items: center; justify-content: center;">
+    <h3 style="margin: 0;">export、import用法</h3>
+</div>
+
+<p>首先，export有兩種方式，一種是default、一種是named。</p>
+<div style="background-color: #44ebbb; color: #4b570e; margin: 10px 0; padding: 10px 20px; width: fit-content; display: inline-block;">
+第一種
+</div> <span style="margin: 0 10px">default用法</span>
+
+<p>export用default時，當我import之後，我的名稱命名不一定要跟export一樣。以下圖為例，我在App.js檔案中export了App（用default方式），但當我在index.js中要import時，發現index.js中有變數已經叫做App了！因此這裡import的名稱就改為MyApp，才不會造成名稱重複而錯誤。<br><img src="https://hackmd.io/_uploads/B1M2GdLch.png"></p>
+<div style="background-color: #44ebbb; color: #4b570e; margin: 10px 0; padding: 10px 20px; width: fit-content; display: inline-block;">
+第二種
+</div> <span style="margin: 0 10px">named用法</span>
+
+<ol>
+<li>我們可以從下圖得知，App.js檔案中，已經有export default App了，因此若我們還想再export多個變數，就需要利用named的方法做export。</li>
+<li>named export方法有兩種：（下圖有示範）<ul>
+<li>大括號</li>
+<li>一條程式完成<br><img src="https://hackmd.io/_uploads/H1q0muLq3.png"></li>
+</ul>
+</li>
+<li>而要import named export時，則需要利用大括號（如下圖）<br><img src="https://hackmd.io/_uploads/rJp6E_Lqn.png"></li>
+<li>另外要注意，import named export時，無法像default export一樣，import named export是無法重新命名的</li>
+</ol>
+<div style="border: black 1px solid; padding: 5px 5px; margin: 15px 0px; display: flex; align-items: center; justify-content: center;">
+    <h3 style="margin: 0;">import from ...</h3>
+</div>
+
+<p>import後面from哪裡，不同來源會有不同寫法，例如說如果檔案室我們自己建立的（例如App.js），則import時會有”.&#x2F;“或”..&#x2F;“，若我們import的東西是來自package（即一開始npm 下載的各種資源），前不會有”.&#x2F;“或”..&#x2F;“。<br><img src="https://hackmd.io/_uploads/BkfgvOI52.png"></p>
+<p>接著可以來理解一下，”.&#x2F;“與”..&#x2F;“兩者之間的差異：<br>“.&#x2F;“用於export及import的檔案在同一個資料夾底下：<br><img src="https://hackmd.io/_uploads/SkenwdU5h.png"></p>
+<p>如下圖所示：<br><img src="https://hackmd.io/_uploads/SJpSdd8cn.png"></p>
+<p>如果複雜一點，與index.js同層次的為component，所以利用”.&#x2F;“可以先得到component，之後在進入到下一層次，也就是我們需要的App.js(如下圖所示)<br><img src="https://hackmd.io/_uploads/HJPpudU9n.png"></p>
+<p>而”..&#x2F;“則是返回到前一層（可以理解”.&#x2F;“是同一層），所以以下方為例：<br><img src="https://hackmd.io/_uploads/rkh15OIc2.png"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">NoZ</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章連結: </span><span class="post-copyright-info"><a href="http://example.com/2023/07/16/React-MRWR-L2/">http://example.com/2023/07/16/React-MRWR-L2/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版權聲明: </span><span class="post-copyright-info">本部落格所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 許可協議。轉載請註明來自 <a href="http://example.com" target="_blank">NoZ</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/React/">React</a><a class="post-meta__tags" href="/tags/Udemy/">Udemy</a></div><div class="post_share"><div class="social-share" data-image="https://i.imgur.com/S10x50r.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-full"><a href="/2023/07/15/React-MRWR-L1/" title="React(MRWR)第 1 節： Let's Dive In!"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">React(MRWR)第 1 節： Let's Dive In!</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相關推薦</span></div><div class="relatedPosts-list"><div><a href="/2023/07/15/React-MRWR-L1/" title="React(MRWR)第 1 節： Let&#39;s Dive In!"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2023-07-15</div><div class="title">React(MRWR)第 1 節： Let&#39;s Dive In!</div></div></a></div></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 評論</span></div></div><div class="comment-wrap"><div><div id="giscus-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.imgur.com/S10x50r.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">NoZ</div><div class="author-info__description">Stop Wishing Start Doing</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">2</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">1</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/NoZ915"><i class="fab fa-github"></i><span>GitHub</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://www.facebook.com/profile.php?id=100003071335913&amp;locale=zh_TW" target="_blank" title="Facebook"><i class="fa-brands fa-square-facebook" style="color: #24292e;"></i></a><a class="social-icon" href="https://www.youtube.com/channel/UCId4oNYwBqxfKjvxl3-PZiA" target="_blank" title="Youtube"><i class="fa-brands fa-youtube" style="color: #24292e;"></i></a><a class="social-icon" href="https://hackmd.io/@noz915" target="_blank" title="HackMD"><i class="fa-solid fa-file" style="color: #24292e;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目錄</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-10-Showing-Basic-Content"><span class="toc-number">1.</span> <span class="toc-text">2-10. Showing Basic Content</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.1.</span> <span class="toc-text">step1. Import React and ReactDOM libraries</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#React"><span class="toc-number">1.1.1.</span> <span class="toc-text">React</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ReactDOM"><span class="toc-number">1.1.2.</span> <span class="toc-text">ReactDOM</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.2.</span> <span class="toc-text">step2. Get a reference to the div with ID root</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.3.</span> <span class="toc-text">step3. Tell react to take control of the element</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.4.</span> <span class="toc-text">step4. Create a component</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number"></span> <span class="toc-text">Hi there!</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">0.1.</span> <span class="toc-text">step5. Show the component on the screen</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-11-What-is-JSX"><span class="toc-number">1.</span> <span class="toc-text">2-11. What is JSX?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-12-Printing-JavaScript-Variables-in-JSX"><span class="toc-number">2.</span> <span class="toc-text">2-12. Printing JavaScript Variables in JSX</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-13-Shorthand-JS-Expressions"><span class="toc-number">3.</span> <span class="toc-text">2-13. Shorthand JS Expressions</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-16-Typical-Component-Layouts"><span class="toc-number">4.</span> <span class="toc-text">2-16. Typical Component Layouts</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-17-Customizing-Elements-with-Props"><span class="toc-number">5.</span> <span class="toc-text">2-17. Customizing Elements with Props</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-18-Converting-HTML-to-JSX"><span class="toc-number">6.</span> <span class="toc-text">2-18. Converting HTML to JSX</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-19-Applying-Styling-in-JSX"><span class="toc-number">7.</span> <span class="toc-text">2-19. Applying Styling in JSX</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-21-Extracting-Components"><span class="toc-number">8.</span> <span class="toc-text">2-21. Extracting Components</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-22-Module-Systems-Overview"><span class="toc-number">9.</span> <span class="toc-text">2-22. Module Systems Overview</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">9.1.</span> <span class="toc-text">export、import用法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">9.2.</span> <span class="toc-text">import from ...</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/07/16/React-MRWR-L2/" title="React(MRWR)第 2 節： Creating Content with JSX">React(MRWR)第 2 節： Creating Content with JSX</a><time datetime="2023-07-15T16:00:00.000Z" title="發表於 2023-07-16 00:00:00">2023-07-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/07/15/React-MRWR-L1/" title="React(MRWR)第 1 節： Let's Dive In!">React(MRWR)第 1 節： Let's Dive In!</a><time datetime="2023-07-14T16:00:00.000Z" title="發表於 2023-07-15 00:00:00">2023-07-15</time></div></div></div></div></div></div></main><footer id="footer" style="background: #24292e"><div id="footer-wrap"><div class="copyright">&copy;2023 By NoZ</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主題 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="閱讀模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="淺色和深色模式轉換"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="單欄和雙欄切換"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="設定"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目錄"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直達評論"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="返回頂部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>(()=>{
+  const getGiscusTheme = theme => {
+    return theme === 'dark' ? 'dark' : 'light'
+  }
+
+  const loadGiscus = () => {
+    const config = Object.assign({
+      src: 'https://giscus.app/client.js',
+      'data-repo': 'NoZ915/NoZ915.github.io',
+      'data-repo-id': 'R_kgDOKtqMtw',
+      'data-category-id': 'DIC_kwDOKtqMt84Ca-Hb',
+      'data-mapping': 'pathname',
+      'data-theme': getGiscusTheme(document.documentElement.getAttribute('data-theme')),
+      'data-reactions-enabled': '1',
+      crossorigin: 'anonymous',
+      async: true
+    },null)
+
+    const ele = document.createElement('script')
+    for (let key in config) {
+      ele.setAttribute(key, config[key])
+    }
+    document.getElementById('giscus-wrap').appendChild(ele)
+  }
+
+  const changeGiscusTheme = theme => {
+    const sendMessage = message => {
+      const iframe = document.querySelector('iframe.giscus-frame')
+      if (!iframe) return
+      iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app')
+    }
+
+    sendMessage({
+      setConfig: {
+        theme: getGiscusTheme(theme)
+      }
+    });
+  }
+
+  btf.addGlobalFn('themeChange', changeGiscusTheme, 'giscus')
+
+  if ('Giscus' === 'Giscus' || !true) {
+    if (true) btf.loadComment(document.getElementById('giscus-wrap'), loadGiscus)
+    else loadGiscus()
+  } else {
+    window.loadOtherComment= loadGiscus
+  }
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
